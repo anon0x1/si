@@ -46,7 +46,8 @@ export const profile = {
 // Top-nav dropdown menus.
 export const navMenus = {
   "Top Projects": [
-    { name: "PentestingEverything", url: "https://github.com/m14r41/PentestingEverything" },
+    { name: "PentestingEverything", url: "https://pentest.m14r41.in/" },
+    { name: "PentestingChecklist", url: "https://checklist.m14r41.in/" },
     { name: "wordlistForger", url: "https://github.com/m14r41/wordlistForger" },
     { name: "scan4secrets", url: "https://github.com/m14r41/scan4secrets" },
     { name: "Scripting4Hackers", url: "https://github.com/m14r41/Scripting4Hackers" },

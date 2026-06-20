@@ -137,7 +137,8 @@ const html = `<!doctype html>
 <title>M14R41-PROFILE</title>
 </head>
 <body>
-<div class="progress" id="progress"></div>
+<!-- Scroll progress bar disabled (re-enable: uncomment this + the JS block + the .progress CSS) -->
+<!-- <div class="progress" id="progress"></div> -->
 <div class="bg-mesh"></div><div class="bg-grid"></div>
 <div class="bg-orb o1"></div><div class="bg-orb o2"></div>
 <span id="top"></span>
@@ -363,7 +364,7 @@ const html = `<!doctype html>
   document.querySelectorAll('.count').forEach(n => countIO.observe(n));
 
   // Scroll progress + nav state
-  const progress = document.getElementById('progress');
+  // const progress = document.getElementById('progress'); // progress bar disabled
   const nav = document.getElementById('nav');
   const toTop = document.getElementById('totop');
   const sections = [...document.querySelectorAll('main section[id]')];
@@ -371,7 +372,7 @@ const html = `<!doctype html>
   function onScroll(){
     const h = document.documentElement;
     const sc = h.scrollTop, max = h.scrollHeight - h.clientHeight;
-    progress.style.width = (max > 0 ? (sc / max) * 100 : 0) + '%';
+    // progress.style.width = (max > 0 ? (sc / max) * 100 : 0) + '%'; // progress bar disabled
     nav.classList.toggle('scrolled', sc > 20);
     toTop.classList.toggle('show', sc > 600);
     let cur = '';

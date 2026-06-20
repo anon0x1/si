@@ -60,8 +60,10 @@ body {
 @keyframes float2 { 50% { transform: translateY(-70px) translateX(-30px); } }
 
 /* ---------- scroll progress ---------- */
+/* Scroll progress bar disabled (re-enable: uncomment here + the HTML div + the JS block in build.ts)
 .progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 80;
   background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3)); box-shadow: 0 0 12px var(--glow); }
+*/
 
 .container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 a { color: var(--accent); text-decoration: none; transition: color 0.15s; }
