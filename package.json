@@ -1,0 +1,15 @@
+{
+  "name": "m14r41-site",
+  "type": "module",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Personal site for Madhurendra Kumar (M14R41). Zero-dependency static generator.",
+  "scripts": {
+    "build": "bun run build.ts",
+    "dev": "bun run build.ts && bunx serve dist -l 4321",
+    "preview": "bunx serve dist -l 4321"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0"
+  }
+}
