@@ -134,7 +134,7 @@ const html = `<!doctype html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="./styles.css" />
-<title>${esc(profile.name)} · ${esc(profile.title)}</title>
+<title>M14R41-PROFILE</title>
 </head>
 <body>
 <div class="progress" id="progress"></div>
