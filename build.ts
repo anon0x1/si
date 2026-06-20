@@ -137,7 +137,7 @@ const html = `<!doctype html>
 <title>M14R41-PROFILE</title>
 </head>
 <body>
-<!-- Scroll progress bar disabled (re-enable: uncomment this + the JS block + the .progress CSS) -->
+<!-- PROGRESS BAR — DISABLED. To re-enable, uncomment ALL 3: (1) this line, (2) the JS block in <script>, (3) the .progress rule in src/styles/global.css. See EDITING-GUIDE.md §12. -->
 <!-- <div class="progress" id="progress"></div> -->
 <div class="bg-mesh"></div><div class="bg-grid"></div>
 <div class="bg-orb o1"></div><div class="bg-orb o2"></div>
@@ -364,7 +364,7 @@ const html = `<!doctype html>
   document.querySelectorAll('.count').forEach(n => countIO.observe(n));
 
   // Scroll progress + nav state
-  // const progress = document.getElementById('progress'); // progress bar disabled
+  // const progress = document.getElementById('progress'); // PROGRESS BAR disabled — re-enable with HTML div + .progress CSS (EDITING-GUIDE.md §12)
   const nav = document.getElementById('nav');
   const toTop = document.getElementById('totop');
   const sections = [...document.querySelectorAll('main section[id]')];
@@ -372,7 +372,7 @@ const html = `<!doctype html>
   function onScroll(){
     const h = document.documentElement;
     const sc = h.scrollTop, max = h.scrollHeight - h.clientHeight;
-    // progress.style.width = (max > 0 ? (sc / max) * 100 : 0) + '%'; // progress bar disabled
+    // progress.style.width = (max > 0 ? (sc / max) * 100 : 0) + '%'; // PROGRESS BAR disabled — re-enable with HTML div + .progress CSS (EDITING-GUIDE.md §12)
     nav.classList.toggle('scrolled', sc > 20);
     toTop.classList.toggle('show', sc > 600);
     let cur = '';
