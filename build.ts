@@ -33,8 +33,8 @@ const dropdowns = Object.entries(navMenus).map(([label, items]) => `
     `<a href="${it.url}" target="_blank" rel="noopener">${esc(it.name)} ${ic("arrow")}</a>`).join("")}</div></div>`).join("");
 
 const mobileExtra = Object.entries(navMenus).map(([label, items]) => `
-  <div class="m-group"><span class="m-label">${esc(label)}</span>
-  ${items.map((it) => `<a href="${it.url}" target="_blank" rel="noopener">${esc(it.name)}</a>`).join("")}</div>`).join("");
+  <details class="m-group"><summary class="m-label">${esc(label)} ${ic("chevron")}</summary>
+  ${items.map((it) => `<a href="${it.url}" target="_blank" rel="noopener">${esc(it.name)}</a>`).join("")}</details>`).join("");
 
 const statsHtml = profile.stats.map((s, i) => `
   <div ${rev(i)}><div class="stat"><div class="ic">${ic(s.icon)}</div>

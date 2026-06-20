@@ -4,3 +4,7 @@ dist/
 .DS_Store
 *.log
 .env
+
+# Local-only docs (never pushed)
+*.local.md
+EDITING-GUIDE.md

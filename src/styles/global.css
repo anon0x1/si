@@ -122,7 +122,11 @@ svg { width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em; 
 .mobile-menu.open { display: flex; }
 .mobile-menu > a { color: var(--muted); padding: 11px 0; font-weight: 500; border-bottom: 1px solid var(--border-soft); }
 .m-group { padding: 12px 0 4px; }
-.m-group .m-label { display: block; font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 6px; }
+.m-group .m-label { display: flex; align-items: center; justify-content: space-between; cursor: pointer; list-style: none; font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); padding: 4px 0; }
+.m-group .m-label::-webkit-details-marker { display: none; }
+.m-group .m-label svg { width: 15px; height: 15px; transition: transform 0.2s ease; }
+.m-group[open] .m-label { margin-bottom: 6px; }
+.m-group[open] .m-label svg { transform: rotate(180deg); }
 .m-group a { display: block; color: var(--muted); font-size: 0.86rem; padding: 7px 0 7px 12px; }
 .m-cta { margin-top: 14px; text-align: center; background: var(--accent); color: #04130d !important; font-weight: 700; padding: 11px !important; border-radius: 9px; border: none !important; }
 @media (max-width: 1080px) { .nav-links { display: none; } .hamburger { display: block; } }
