@@ -120,6 +120,34 @@ const locSource = currentRoles.find((e) => e.loc && e.loc !== "Remote")
   ?? currentRoles[0] ?? (experience as any[])[0];
 const footerLocation = String(locSource?.loc ?? profile.location).split(" · ")[0].trim();
 
+// SEO. Person structured data (schema.org) so search engines tie the name + aliases
+// (Madhurendra, M14R41, "Madhurendra Hacker") and social profiles to this site.
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  alternateName: ["M14R41", "m14r41", "Madhurendra", "Madhurendra Hacker"],
+  jobTitle: profile.title,
+  description: profile.summary,
+  url: soc.website,
+  image: `${soc.website}/avatar.png`,
+  email: `mailto:${soc.email}`,
+  address: { "@type": "PostalAddress", addressLocality: footerLocation },
+  knowsAbout: [
+    "Cyber Security", "Ethical Hacking", "Penetration Testing", "Bug Bounty",
+    "Vulnerability Research", "Application Security", "API Security",
+    "Cloud Security", "CVE Research", "Web Application Security",
+  ],
+  sameAs: [soc.github, soc.linkedin, soc.twitter, soc.medium, soc.blog, soc.hackthebox].filter(Boolean),
+};
+const jsonLd = JSON.stringify(personSchema);
+const seoTitle = `${profile.name} (${profile.handle}) — Ethical Hacker & Security Researcher`;
+const seoKeywords = [
+  "Madhurendra", "Madhurendra Kumar", "Madhurendra Hacker", "M14R41", "m14r41",
+  "hacker", "ethical hacker", "cyber security", "cybersecurity", "security researcher",
+  "penetration testing", "bug bounty", "CVE", "vulnerability research", "application security",
+].join(", ");
+
 const html = `<!doctype html>
 <html lang="en">
 <head>
@@ -128,17 +156,24 @@ const html = `<!doctype html>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-L16KL7RKER"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-L16KL7RKER');</script>
 <meta name="description" content="${esc(profile.summary)}" />
-<meta name="keywords" content="Madhurendra Kumar, M14R41, Senior Security Consultant, Bug Bounty, Penetration Testing, CVE, Security Research" />
+<meta name="keywords" content="${esc(seoKeywords)}" />
 <meta name="author" content="${esc(profile.name)}" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 <meta name="theme-color" content="#060910" />
-<meta property="og:title" content="${esc(profile.name)} · ${esc(profile.title)}" />
+<meta property="og:site_name" content="${esc(profile.name)} · ${esc(profile.handle)}" />
+<meta property="og:title" content="${esc(seoTitle)}" />
 <meta property="og:description" content="${esc(profile.summary)}" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content="profile" />
+<meta property="og:locale" content="en_US" />
 <meta property="og:url" content="${soc.website}" />
 <meta property="og:image" content="${soc.website}/avatar.png" />
+<meta property="og:image:alt" content="${esc(profile.name)} (${esc(profile.handle)})" />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="${esc(seoTitle)}" />
+<meta name="twitter:description" content="${esc(profile.summary)}" />
 <meta name="twitter:image" content="${soc.website}/avatar.png" />
 <link rel="canonical" href="${soc.website}" />
+<script type="application/ld+json">${jsonLd}</script>
 <link rel="icon" type="image/png" href="./avatar.png" />
 <link rel="apple-touch-icon" href="./avatar.png" />
 <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
@@ -146,7 +181,7 @@ const html = `<!doctype html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="./styles.css" />
-<title>M14R41-PROFILE</title>
+<title>${esc(seoTitle)}</title>
 </head>
 <body>
 <!-- PROGRESS BAR — DISABLED. To re-enable, uncomment ALL 3: (1) this line, (2) the JS block in <script>, (3) the .progress rule in src/styles/global.css. See EDITING-GUIDE.md §12. -->
@@ -441,4 +476,16 @@ copyFileSync("public/favicon.svg", "dist/favicon.svg");
 copyFileSync("public/avatar.png", "dist/avatar.png");
 copyFileSync("public/CNAME", "dist/CNAME");
 writeFileSync("dist/.nojekyll", "");
+
+// SEO crawlability: robots.txt (allow all + sitemap pointer) and a sitemap.
+const buildDate = new Date().toISOString().slice(0, 10);
+writeFileSync(
+  "dist/robots.txt",
+  `User-agent: *\nAllow: /\n\nSitemap: ${soc.website}/sitemap.xml\n`,
+);
+writeFileSync(
+  "dist/sitemap.xml",
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${soc.website}/</loc>\n    <lastmod>${buildDate}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>\n`,
+);
+
 console.log(`Built dist/ · ${cves.length} CVEs, ${experience.length} roles, ${projects.length} projects, ${arsenal.length} domains, ${(html.length/1024).toFixed(1)}KB HTML`);
