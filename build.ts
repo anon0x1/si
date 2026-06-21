@@ -141,7 +141,7 @@ const personSchema = {
   sameAs: [soc.github, soc.linkedin, soc.twitter, soc.medium, soc.blog, soc.hackthebox].filter(Boolean),
 };
 const jsonLd = JSON.stringify(personSchema);
-const seoTitle = `${profile.name} (${profile.handle}) — Ethical Hacker & Security Researcher`;
+const seoTitle = `${profile.handle} — ${profile.name.split(" ")[0]} | Security Researcher`;
 const seoKeywords = [
   "Madhurendra", "Madhurendra Kumar", "Madhurendra Hacker", "M14R41", "m14r41",
   "hacker", "ethical hacker", "cyber security", "cybersecurity", "security researcher",
