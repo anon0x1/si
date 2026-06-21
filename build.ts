@@ -64,20 +64,24 @@ const expHtml = experience.map((e, i) => `
   <ul>${e.points.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>
   ${(e as any).skills?.length ? `<div class="tl-skills">${(e as any).skills.map((s: string) => `<span class="tag">${esc(s)}</span>`).join("")}</div>` : ""}</div></div></div>`).join("");
 
-const projHtml = projects.map((p, i) => `
-  <div class="reveal flex-cell" style="transition-delay:${Math.min(i * 70, 420)}ms"><div class="card proj"><div class="top"><span class="fic">${ic("folder")}</span>
+const projHtml = projects.map((p, i) => {
+  const repo = p.url.replace(/^https?:\/\/github\.com\//, "").replace(/\/$/, "");
+  const repoAttr = /^[^/]+\/[^/]+$/.test(repo) ? ` data-repo="${esc(repo)}"` : "";
+  return `
+  <div class="reveal flex-cell" style="transition-delay:${Math.min(i * 70, 420)}ms"><div class="card proj"${repoAttr}><div class="top"><span class="fic">${ic("folder")}</span>
   <a class="ext" href="${p.url}" target="_blank" rel="noopener" aria-label="Open ${esc(p.name)} on GitHub">${ic("arrow")}</a></div>
   <h3><a href="${p.url}" target="_blank" rel="noopener">${esc(p.name)}</a></h3>
   <p>${esc(p.desc)}</p>
   <div class="ctags">${(p.tags ?? []).map((t) => `<span class="ctag">${esc(t)}</span>`).join("")}</div>
   <div class="proj-foot">
-    <span class="metric" title="Stars">${ic("star")} ${fmt(p.stars)}</span>
-    <span class="metric" title="Forks">${ic("gitfork")} ${fmt(p.forks)}</span>
+    <span class="metric" title="Stars">${ic("star")} <span class="mval" data-metric="stars">${fmt(p.stars)}</span></span>
+    <span class="metric" title="Forks">${ic("gitfork")} <span class="mval" data-metric="forks">${fmt(p.forks)}</span></span>
     <span class="proj-links">
       <a href="${p.url}" target="_blank" rel="noopener">${ic("github")} Code</a>
       ${p.site ? `<a href="${p.site}" target="_blank" rel="noopener">${ic("globe")} Live</a>` : ""}
     </span>
-  </div></div></div>`).join("");
+  </div></div></div>`;
+}).join("");
 
 const writeHtml = writeups.map((w, i) => `
   <div class="reveal flex-cell" style="transition-delay:${Math.min(i * 70, 420)}ms"><div class="card art"><div class="top"><span class="fic">${ic("pen")}</span>
@@ -107,6 +111,14 @@ const half = Math.ceil(cves.length / 2);
 const rowA = cves.slice(0, half), rowB = cves.slice(half);
 const chips = (arr: string[]) => [...arr, ...arr]
   .map((c) => `<a class="cve-chip" href="https://www.cve.org/CVERecord?id=${c}" target="_blank" rel="noopener">${esc(c)}</a>`).join("");
+
+// Footer location, derived from experience (not hardcoded). Picks the current role's
+// city — preferring a real location over "Remote" — and strips suffixes like "· On-site".
+// Add a new current role in profile.ts (e.g. loc: "Tokyo, Japan") and the footer follows.
+const currentRoles = (experience as any[]).filter((e) => e.current);
+const locSource = currentRoles.find((e) => e.loc && e.loc !== "Remote")
+  ?? currentRoles[0] ?? (experience as any[])[0];
+const footerLocation = String(locSource?.loc ?? profile.location).split(" · ")[0].trim();
 
 const html = `<!doctype html>
 <html lang="en">
@@ -164,15 +176,15 @@ const html = `<!doctype html>
     </div>
   </div>
   <div class="terminal reveal">
-    <div class="term-bar"><span class="d d1"></span><span class="d d2"></span><span class="d d3"></span><span class="t">m14r41@sec · zsh</span></div>
+    <div class="term-bar"><span class="d d1"></span><span class="d d2"></span><span class="d d3"></span><span class="t">root@m14r41 · zsh</span></div>
     <div class="term-body">
-      <div class="l"><span class="p">m14r41@sec</span>:<span class="k">~</span>$ id</div>
-      <div class="l"><span class="c">uid</span>=<span class="s">1337</span>(<span class="s">consultant</span>) <span class="c">groups</span>=<span class="s">offsec,research</span></div>
-      <div class="l"><span class="p">m14r41@sec</span>:<span class="k">~</span>$ specs</div>
-      <div class="l"><span class="s">Ryzen 10</span> · <span class="s">8GB GPU</span> · <span class="s">64GB DDR6 RAM</span></div>
-      <div class="l"><span class="p">m14r41@sec</span>:<span class="k">~</span>$ sudo find / -name <span class="s">'*.bug'</span></div>
+      <div class="l"><span class="p">root@m14r41</span>:<span class="k">~</span># id</div>
+      <div class="l"><span class="c">uid</span>=<span class="s">0</span>(<span class="s">root</span>) <span class="c">groups</span>=<span class="s">offsec,research</span></div>
+      <div class="l"><span class="p">root@m14r41</span>:<span class="k">~</span># specs /Fake</div>
+      <div class="l"><span class="s">Ryzen 11</span> · <span class="s">16GB GPU</span> · <span class="s">128GB DDR6 RAM</span></div>
+      <div class="l"><span class="p">root@m14r41</span>:<span class="k">~</span># find / -name <span class="s">'*.bug'</span></div>
       <div class="l"><span class="p">[+]</span> <span class="s">50+</span> found · all reported responsibly</div>
-      <div class="l"><span class="p">m14r41@sec</span>:<span class="k">~</span>$ <span class="cursor">&nbsp;</span></div>
+      <div class="l"><span class="p">root@m14r41</span>:<span class="k">~</span># <span class="cursor">&nbsp;</span></div>
     </div>
   </div>
 </div>
@@ -305,7 +317,7 @@ const html = `<!doctype html>
   </div>
   <div class="foot-bottom">
     <span>© <span id="year">${year}</span> ${esc(profile.name)} · ${esc(profile.handle)}</span>
-    <span>${esc(profile.location)} · Built with care</span>
+    <span>${esc(footerLocation)} · Trust No Input</span>
   </div>
 </div></footer>
 
@@ -385,6 +397,39 @@ const html = `<!doctype html>
   // Footer year, always current (no rebuild needed)
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Live GitHub stars/forks — fetched on load, updates the baked-in numbers.
+  // Cached in localStorage for 30 min so refreshes don't burn the 60/hr unauth rate limit.
+  (function(){
+    const TTL = 30 * 60 * 1000;
+    const fmt = (n) => (n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k' : '' + n);
+    const cards = document.querySelectorAll('.card.proj[data-repo]');
+    cards.forEach((card) => {
+      const repo = card.getAttribute('data-repo');
+      const key = 'gh:' + repo;
+      const apply = (d) => {
+        const s = card.querySelector('.mval[data-metric="stars"]');
+        const f = card.querySelector('.mval[data-metric="forks"]');
+        if (s && typeof d.stars === 'number') s.textContent = fmt(d.stars);
+        if (f && typeof d.forks === 'number') f.textContent = fmt(d.forks);
+      };
+      try {
+        const cached = JSON.parse(localStorage.getItem(key) || 'null');
+        if (cached) {
+          apply(cached);
+          if (Date.now() - cached.t < TTL) return; // fresh enough, skip network
+        }
+      } catch (e) {}
+      fetch('https://api.github.com/repos/' + repo, { headers: { Accept: 'application/vnd.github+json' } })
+        .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+        .then((j) => {
+          const d = { stars: j.stargazers_count, forks: j.forks_count, t: Date.now() };
+          apply(d);
+          try { localStorage.setItem(key, JSON.stringify(d)); } catch (e) {}
+        })
+        .catch(() => {}); // keep the baked-in number on any error / rate limit
+    });
+  })();
 </script>
 </body>
 </html>`;
