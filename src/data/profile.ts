@@ -46,7 +46,7 @@ export const profile = {
 // Top-nav dropdown menus.
 export const navMenus = {
   "Top Projects": [
-    { name: "PentestingEverything", url: "https://pentest.m14r41.in/" },
+    { name: "PentestingEverything", url: "https://pentesting.m14r41.in/" },
     { name: "PentestingChecklist", url: "https://checklist.m14r41.in/" },
     { name: "wordlistForger", url: "https://github.com/m14r41/wordlistForger" },
     { name: "scan4secrets", url: "https://github.com/m14r41/scan4secrets" },
@@ -257,7 +257,7 @@ export const projects = [
     desc: "Comprehensive repository of 15+ types of pentesting tools, resources and methodology. A one-stop reference for offensive security.",
     tags: ["Methodology", "Toolkit"],
     url: "https://github.com/m14r41/PentestingEverything",
-    site: "https://pentest.m14r41.in",
+    site: "https://pentesting.m14r41.in",
     stars: 1711,
     forks: 388,
   },
