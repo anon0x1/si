@@ -38,7 +38,7 @@ export const profile = {
     website: "https://m14r41.in",
     blog: "https://blogs.m14r41.in",
     medium: "https://medium.com/@m14r41",
-    tryhackme: "https://tryhackme.com/p/m14r41",
+    tryhackme: "https://tryhackme.com/p/M14R41",
     hackthebox: "https://profile.hackthebox.com/profile/019e4595-6972-7044-ab6b-d65fdd15f3a0",
   },
 };
