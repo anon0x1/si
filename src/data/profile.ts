@@ -20,9 +20,9 @@ export const profile = {
     "Security consultant and researcher with 50+ assigned CVEs. I test web apps, APIs, mobile, thick clients, cloud and networks, then report findings teams can act on.",
   // Long-form bio shown in the About section.
   about: [
-    "I'm Madhurendra, a security consultant based in Bengaluru. I've spent the last few years doing penetration testing and vulnerability research full-time, with 50+ CVEs assigned along the way. I hold the eWPTXv3, CAP and CEH Master certifications, plus an MCA degree.",
-    "I work across web, API, Android, iOS, thick-client, network and cloud testing, along with secure source-code review. Most of my tooling is in Bash and Python, and I'm comfortable across the common stacks and operating systems.",
-    "Outside of client work I hunt bugs, play CTFs on Hack The Box and TryHackMe, and write up what I find on Medium. Always happy to talk shop with people working in security.",
+    "I'm Madhurendra, a security consultant based in Bengaluru. I've spent the last few years doing penetration testing and vulnerability research full-time, with 50+ CVEs assigned along the way. I hold CRTPT, eWPTXv3, and CEH Master certifications, along with my MCA degree",
+    "I work across web, API, Android, iOS, thick-client, network and cloud testing, Agentic Pentest, along with secure source-code review, SCA, Threate modeling etc. Most of my tooling is in Bash and Python, and I'm comfortable across the common programming language and Linux/Windows.",
+    "Outside of the office work, I spends time on research, contribute on my open source project, hunt bugs, play CTFs on Hack The Box and TryHackMe, and write technical articles on Medium. I'm always happy to connect with others in the security community.",
   ],
   stats: [
     { value: "50", suffix: "+", label: "CVEs Assigned", icon: "bug" },
@@ -50,7 +50,9 @@ export const navMenus = {
     { name: "PentestingChecklist", url: "https://checklist.m14r41.in/" },
     { name: "wordlistForger", url: "https://github.com/m14r41/wordlistForger" },
     { name: "scan4secrets", url: "https://github.com/m14r41/scan4secrets" },
+    { name: "vulnerable-thick-client", url: "https://github.com/m14r41/m14r41-vulnerable-thick-client" },
     { name: "Scripting4Hackers", url: "https://github.com/m14r41/Scripting4Hackers" },
+    { name: "PayoadEverything", url: "https://github.com/m14r41/PayloadEverything" },
     { name: "Clickjacking-Poc", url: "https://github.com/m14r41/Clickjacking-Poc" },
   ],
   "Live Resources": [
@@ -269,15 +271,15 @@ export const projects = [
     site: "https://checklist.m14r41.in",
     stars: 51,
     forks: 10,
-  },
-  {
-    name: "Clickjacking-Poc",
-    desc: "Instant clickjacking proof-of-concept generator to demonstrate UI-redress vulnerabilities for reports.",
-    tags: ["PoC", "Web"],
-    url: "https://github.com/m14r41/Clickjacking-Poc",
-    site: "https://clickjacking.m14r41.in",
-    stars: 8,
-    forks: 1,
+   },
+   {
+    name: "MVTC",
+    desc: "Vulnerable desktop/thick-client application featuring 51 hands-on security challenges for penetration testing practice.",
+    tags: ["Thick Client", "Lab"],
+    url: "https://github.com/m14r41/m14r41-vulnerable-thick-client",
+    site: "",
+    stars: 0,
+    forks: 0,
   },
   {
     name: "scan4secrets",
@@ -289,13 +291,13 @@ export const projects = [
     forks: 32,
   },
   {
-    name: "wordlistForger",
-    desc: "Targeted wordlist generator that forges context-aware lists to sharpen fuzzing and brute-force coverage.",
-    tags: ["Recon", "Wordlists"],
-    url: "https://github.com/m14r41/wordlistForger",
-    site: "",
-    stars: 4,
-    forks: 2,
+  name: "PayloadEverything",
+  desc: "Comprehensive collection of payloads for penetration testing, vulnerability assessment, and security research.",
+  tags: ["Payloads", "Web"],
+  url: "https://github.com/m14r41/PayloadEverything",
+  site: "",
+  stars: 0,
+  forks: 0,
   },
   {
     name: "Scripting4Hackers",
