@@ -17,7 +17,7 @@ export const profile = {
   location: "Bengaluru, India",
   available: "Open to research & collaboration",
   summary:
-    "Security consultant and researcher with 50+ assigned CVEs. I test web apps, APIs, mobile, thick clients, cloud and networks, then report findings teams can act on.",
+    "Security Consultant & Vulnerability Researcher working across penetration testing and security research. I enjoy understanding how systems work, finding vulnerabilities and understanding how systems can be secured.",
   // Long-form bio shown in the About section.
   about: [
     "I'm Madhurendra, a security consultant based in Bengaluru. I've spent the last few years doing penetration testing and vulnerability research full-time, with 50+ CVEs assigned along the way. I hold CRTPT, eWPTXv3, and CEH Master certifications, along with my MCA degree",
